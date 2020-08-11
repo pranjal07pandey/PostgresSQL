@@ -1,0 +1,60 @@
+select * from payment;
+
+select extract (year from payment_date) as my_year
+from payment;
+
+select age(payment_date)
+from payment;
+
+
+select to_char(payment_date, 'MONTH/dd/YYYY')
+from payment;
+
+select distinct(to_char(payment_date, 'MONTH'))
+from payment;
+
+select count(*) from payment
+where extract (DOW from payment_date)= '1';
+
+select length(first_name) from customer;
+
+select first_name || ' ' || last_name as full_name
+from customer;
+
+
+select lower(first_name) ||'.'||lower(last_name)||'@gmail.com' as email
+from customer;
+
+--subquery--
+select title, rental_rate from film
+where rental_rate >
+(select avg(rental_rate) from film);
+
+
+select film.title from
+rental
+inner join inventory 
+on inventory.inventory_id = rental.inventory_id
+inner join film
+on inventory.film_id = film.film_id
+where rental.return_date between '2005-05-29' and '2005-05-30'
+
+
+select film_id , title from
+film
+where film_id in
+(select inventory.film_id from 
+inventory
+inner join rental
+on inventory.inventory_id = rental.inventory_id
+where rental.return_date between '2005-05-29' and '2005-05-30')
+order by film_id;
+
+--self join
+
+select f1.title, f2.title, f1.length
+from film as f1
+inner join film as f2 on
+f1.film_id != f2.film_id
+and f1.length = f2.length
+order by length desc;

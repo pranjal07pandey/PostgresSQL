@@ -1,0 +1,69 @@
+select country, last_update from country where country = 'Japan';
+select (title) from film where rating = 'PG';
+select distinct(rating) from film;
+
+select title from film where rental_rate >4
+and replacement_cost>=25
+and rating ='R';
+
+select  count(title) from film where rating ='R';
+
+select email from customer where first_name ='Nancy' and last_name = 'Thomas';
+
+select description from film where title='Outlaw Hanky';
+
+select phone from address
+where address = '259 Ipoh Drive';
+
+
+select store_id, first_name, last_name
+from customer
+where customer_id<10
+order by store_id desc,
+last_name desc;
+
+select * from payment
+where amount !=0
+order by payment_date desc
+limit 5;
+
+select customer_id from payment
+order by payment_date
+limit 10;
+
+select title, length from film
+order by length
+limit 5;
+
+select count(*) from film
+where length <=50;
+
+select * from payment 
+where payment_date between '2007-02-01' and '2007-02-15';
+
+select * from film
+where film_id between 1 and 5;
+
+select * from customer
+where first_name like '_is%'
+order by first_name;
+
+--challenges--
+select count(*) from payment
+where amount > 5;
+
+select count(*) from actor
+where first_name like 'P%';
+
+select count(distinct district)
+from address;
+
+select distinct(district)
+from address;
+
+select count (*) from film
+where rating = 'R'
+and replacement_cost between 5 and 15;
+ 
+select count(*) from film
+where title like '%Truman%';
