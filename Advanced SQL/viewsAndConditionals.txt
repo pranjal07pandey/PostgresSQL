@@ -1,0 +1,71 @@
+select customer_id, 
+case
+	when (customer_id <= 100) then 'Premium'
+	when (customer_id between 100 and 200) then 'Plus'
+	else 'Normal'	
+end as customer_type
+from customer
+
+
+select customer_id,
+case customer_id
+	when 2 then 'Winner'
+	when 5 then 'Second Place'
+	else 'Normal'
+end as raffel_result	
+from customer;
+
+
+select rental_rate, count(rental_rate) as no_of_movies
+from film
+where rental_rate = 0.99
+group by rental_rate;
+
+
+select distinct rating from film;
+
+
+select 
+sum(case rating
+	when 'NC-17' then 1
+	else 0
+end) as NC_17,
+
+sum(case rating
+	when 'G' then 1
+	else 0
+end) as G,
+
+sum(case rating
+	when 'PG' then 1
+	else 0
+end) as PG,
+
+sum(case rating
+	when 'PG-13' then 1
+	else 0
+end) as PG_13,
+
+sum(case rating
+	when 'R' then 1
+	else 0
+end) as R
+
+from film;
+
+
+--views--
+
+create view customer_info as
+	select first_name, last_name, address.address from 
+	customer
+	inner join address on
+	address.address_id = customer.address_id;
+
+create or replace view customer_info as
+	select first_name, last_name, address.address, district from 
+	customer
+	inner join address on
+	address.address_id = customer.address_id;
+
+select * from customer_info;

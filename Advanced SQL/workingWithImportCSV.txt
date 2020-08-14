@@ -1,0 +1,3 @@
+first create a table in the db with the desired columns as per the csv file and its data type
+then run the import command
+i.e. using the copy function : \copy table_name FROM '/path/to/csv/csv_file.csv' DELIMITER ',' CSV
